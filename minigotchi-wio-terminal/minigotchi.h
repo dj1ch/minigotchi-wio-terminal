@@ -13,7 +13,6 @@
 #include "parasite.h"
 #include "pwnagotchi.h"
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
 
 class Minigotchi {
 public:
