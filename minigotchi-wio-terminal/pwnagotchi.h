@@ -9,7 +9,6 @@
 #include "minigotchi.h"
 #include "parasite.h"
 #include "wifi.h"
-#include <wifi_conf>
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <stdint.h>

@@ -11,8 +11,6 @@
  * Quite a few are not used currently. Still keeping them for reference.
  */
 
-#include <ESP8266WiFi.h>
-
 // SDK structures -----------------------------------
 
 // source:
