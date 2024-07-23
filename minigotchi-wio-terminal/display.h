@@ -17,6 +17,10 @@ public:
   static void startScreen();
   static void updateDisplay(String face);
   static void updateDisplay(String face, String text);
+  static String storedFace;
+  static String previousFace;
+  static String storedText;
+  static String previousText;
 
 private:
   static TFT_eSPI *tft_display;
