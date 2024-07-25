@@ -13,7 +13,6 @@
 #include "parasite.h"
 #include "pwnagotchi.h"
 #include <Arduino.h>
-#include <string>
 
 class Minigotchi {
 public:

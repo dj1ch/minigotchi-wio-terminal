@@ -32,7 +32,6 @@
 #include <WiFi.h>
 #include "rpcWiFi.h"
 #include <stdint.h>
-#include <string>
 
 class Pwnagotchi {
 public:
@@ -41,9 +40,9 @@ public:
   static void stopCallback();
 
 private:
-  static std::string extractMAC(const unsigned char *buff);
+  static String extractMAC(const unsigned char *buff);
   static void getMAC(char *addr, const unsigned char *buff, int offset);
-  static std::string essid;
+  static String essid;
   static bool pwnagotchiDetected;
 
   // source:

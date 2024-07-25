@@ -12,7 +12,7 @@
 
 ### Intro
 
-This is the port of Minigotchi to the Wio terminal. Instead of being an ESP32 or ESP8266 sort of SoC, the Wio terminal uses a RTL8720 wifi card, which is... different, especially for a microcontroller.
+This is the port of Minigotchi to the Wio terminal. Instead of being an ESP32 or ESP8266 sort of SoC, the Wio terminal uses a RTL8720 wifi card, which is... different, especially for a microcontroller. Due to a lack of libraries, support for specific features that the ESP has, there were many features that were stripped from this version.
 
 A lot of the hardware APIs and functions aren't really shown or used often in projects involving this microcontroller, so I had to do a bit of digging. At least this is a prebuilt!
 

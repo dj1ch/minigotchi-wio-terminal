@@ -60,7 +60,6 @@ void Minigotchi::boot() {
   Serial.println("#                BOOTUP PROCESS                #");
   Serial.println("################################################");
   Serial.println(" ");
-  Deauth::list();
   Channel::init(Config::channel);
   Minigotchi::info();
   Parasite::sendName();

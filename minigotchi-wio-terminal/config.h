@@ -7,8 +7,6 @@
 
 #include "minigotchi.h"
 #include <Arduino.h>
-#include <vector>
-#include <string>
 
 class Config {
 public:
@@ -22,7 +20,6 @@ public:
   static String screen;
   static int baud;
   static int channel;
-  static std::vector<std::string> whitelist;
   static int epoch;
   static String grid_version;
   static String face;

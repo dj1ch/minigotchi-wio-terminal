@@ -54,10 +54,10 @@ void Pwnagotchi::getMAC(char *addr, const unsigned char *buff, int offset) {
  * Extract Mac Address using getMac()
  * @param buff Buffer to use
  */
-std::string Pwnagotchi::extractMAC(const unsigned char *buff) {
+String Pwnagotchi::extractMAC(const unsigned char *buff) {
   char addr[] = "00:00:00:00:00:00";
   getMAC(addr, buff, 10);
-  return std::string(addr);
+  return String(addr);
 }
 
 /**

@@ -11,16 +11,10 @@
 #include <Arduino.h>
 #include "wifi.h"
 #include "rpcWiFi.h"
-#include <algorithm>
-#include <sstream>
-#include <string>
-#include <vector>
 
 class Deauth {
 public:
   static void deauth();
-  static void list();
-  static void add(const std::string &bssids);
   static uint8_t deauthTemp[26];
   static uint8_t deauthFrame[26];
   static uint8_t disassociateFrame[26];
@@ -37,7 +31,6 @@ private:
   static void start();
   static uint8_t bssid[6];
   static bool running;
-  static std::vector<std::string> whitelist;
   static String randomAP;
 };
 

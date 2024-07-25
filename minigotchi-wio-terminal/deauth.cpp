@@ -14,7 +14,6 @@
 
 // default values before we start
 bool Deauth::running = false;
-std::vector<std::string> Deauth::whitelist = {};
 String Deauth::randomAP = "";
 int Deauth::randomIndex;
 
@@ -62,33 +61,12 @@ uint8_t Deauth::broadcastAddr[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
  * Adds SSIDs (or BSSIDs) to the whitelist
  * @param bssids SSIDs/BSSIDs to whitelist
  */
-void Deauth::add(const std::string &bssids) {
-  std::stringstream ss(bssids);
-  std::string token;
-
-  // seperate info and whitelist
-  while (std::getline(ss, token, ',')) {
-    // trim out whitespace
-    token.erase(0, token.find_first_not_of(" \t\r\n"));
-    token.erase(token.find_last_not_of(" \t\r\n") + 1);
-
-    // add to whitelist
-    Serial.print("('-') Adding ");
-    Serial.print(token.c_str());
-    Serial.println(" to the whitelist");
-    Display::updateDisplay("('-')", "Adding " + (String) + " to the whitelist");
-    whitelist.push_back(token.c_str());
-  }
-}
+// broken
 
 /**
  * Adds everything to the whitelist
  */
-void Deauth::list() {
-  for (const auto &bssid : Config::whitelist) {
-    Deauth::add(bssid);
-  }
-}
+// broken
 
 /**
  * Sends a packet
@@ -221,16 +199,7 @@ bool Deauth::select() {
     }
 
     // check for ap in whitelist
-    if (std::find(whitelist.begin(), whitelist.end(), randomAP) !=
-        whitelist.end()) {
-      Serial.println("('-') Selected AP is in the whitelist. Skipping "
-                     "deauthentication...");
-      Display::updateDisplay(
-          "('-')",
-          "Selected AP is in the whitelist. Skipping deauthentication...");
-      Parasite::sendDeauthStatus(SKIPPING_WHITELIST);
-      return false;
-    }
+    // broken
 
     /** developer note:
      *

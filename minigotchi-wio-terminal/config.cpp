@@ -35,7 +35,7 @@ int Config::baud = 115200;
 int Config::channel = 1;
 
 // define whitelist
-std::vector<std::string> Config::whitelist = {"SSID", "SSID", "SSID"};
+// broken
 
 // json config
 int Config::epoch = Minigotchi::currentEpoch;
