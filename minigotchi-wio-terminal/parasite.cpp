@@ -166,11 +166,11 @@ void Parasite::sendDeauthStatus(parasite_deauth_status_type_t status,
 
 /**
  * Algorithm to send serial data
- * @param command Current command
+ * @param cmd Current command
  * @param status Current status
  * @param data Data to use
  */
-void Parasite::sendData(const char *command, uint8_t status, const char *data) {
+void Parasite::sendData(const char *cmd, uint8_t status, const char *data) {
   JsonDocument doc;
   char nBuf[4];  // Up to 3 digits + null terminator
   char buf[129]; // Up to 128 characters + null terminator
@@ -182,7 +182,7 @@ void Parasite::sendData(const char *command, uint8_t status, const char *data) {
     doc["data"] = data;
   }
   serializeJson(doc, buf);
-  strncat(fullCmd, command, sizeof(fullCmd) - 1);
+  strncat(fullCmd, cmd, sizeof(fullCmd) - 1);
   strncat(fullCmd, ":::", sizeof(fullCmd) - strlen(fullCmd) - 1);
   strncat(fullCmd, buf, sizeof(fullCmd) - strlen(fullCmd) - 1);
   Serial.println(fullCmd);

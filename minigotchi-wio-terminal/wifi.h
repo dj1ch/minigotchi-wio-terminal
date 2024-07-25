@@ -6,6 +6,9 @@
 #ifndef WIFI_H
 #define WIFI_H
 
+#include <stdint.h>
+#include <string.h>
+
 typedef struct {
   uint16_t frame_control = 0xC0;
   uint16_t duration = 0xFFFF;
