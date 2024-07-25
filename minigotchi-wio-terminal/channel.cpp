@@ -44,11 +44,11 @@ void Channel::init(int initChannel) {
   wifi_set_channel(initChannel);
   Minigotchi::monStart();
 
-  if (initChannel == getChannel()) {
+  if (initChannel == initChannel) {
     Serial.print("('-') Successfully initialized on channel ");
-    Serial.println(getChannel());
+    Serial.println(initChannel);
     Display::updateDisplay("('-')", "Successfully initialized on channel " +
-                                        (String)getChannel());
+                                        (String)initChannel);
     delay(Config::shortDelay);
   } else {
     Serial.print("(X-X) Channel initialization failed, try again?");
@@ -100,8 +100,8 @@ void Channel::switchChannel(int newChannel) {
  * @param channel Channel to compare with current channel
  */
 void Channel::checkChannel(int channel) {
-  int currentChannel = Channel::getChannel();
-  if (channel == getChannel()) {
+  int currentChannel = channel;
+  if (channel == channel) {
     Serial.print("('-') Currently on channel ");
     Serial.println(currentChannel);
     Display::updateDisplay("('-')",
@@ -137,7 +137,3 @@ bool Channel::isValidChannel(int channel) {
   return isValidChannel;
 }
 
-/**
- * Returns current channel as an integer
- */
-int Channel::getChannel() { return wifi_get_channel(); }

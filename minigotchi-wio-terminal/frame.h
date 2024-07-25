@@ -12,16 +12,13 @@
 #include "parasite.h"
 #include <ArduinoJson.h>
 #include "wifi.h"
-#include <sstream>
-#include <string>
-#include <vector>
 
 class Frame {
 public:
   ~Frame();
 
   static uint8_t *pack();
-  static bool send();
+  static void send();
   static void advertise();
   static const uint8_t header[];
   static const uint8_t IDWhisperPayload;

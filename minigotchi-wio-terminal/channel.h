@@ -14,7 +14,7 @@ public:
   static void init(int initChannel);
   static void cycle();
   static void switchChannel(int newChannel);
-  static int getChannel();
+  static int getChannel(int *channel);
   static void checkChannel(int channel);
   static bool isValidChannel(int channel);
   static int channelList[13]; // 13 channels

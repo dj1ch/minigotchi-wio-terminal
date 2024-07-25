@@ -10,6 +10,7 @@
 #include "parasite.h"
 #include <Arduino.h>
 #include "wifi.h"
+#include "rpcWiFi.h"
 #include <algorithm>
 #include <sstream>
 #include <string>
@@ -27,7 +28,7 @@ public:
   static int randomIndex;
 
 private:
-  static bool send(uint8_t *buf, uint16_t len, bool sys_seq);
+  static void send(uint8_t *buf, uint16_t len);
   static bool broadcast(uint8_t *mac);
   static String printHidden(int network);
   static void printMac(uint8_t *mac);
@@ -36,7 +37,7 @@ private:
   static void start();
   static uint8_t bssid[6];
   static bool running;
-  static std::vector<String> whitelist;
+  static std::vector<std::string> whitelist;
   static String randomAP;
 };
 

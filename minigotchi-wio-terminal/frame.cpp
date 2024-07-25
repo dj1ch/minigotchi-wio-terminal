@@ -185,7 +185,7 @@ uint8_t *Frame::pack() {
 /**
  * Sends a pwnagotchi packet in AP mode
  */
-bool Frame::send() {
+void Frame::send() {
   // build frame
   WiFi.mode(WIFI_AP);
   uint8_t *frame = Frame::pack();
@@ -195,11 +195,10 @@ bool Frame::send() {
   // send full frame
   // we dont use raw80211 since it sends a header(which we don't need), although
   // we do use it for monitoring, etc.
-  Frame::sent = wifi_send_pkt_freedom(frame, frameSize, 0);
+  wifi_tx_raw_frame(frame, frameSize);
   delay(102);
 
   delete[] frame;
-  return (Frame::sent == 0);
 }
 
 /**
@@ -217,25 +216,21 @@ void Frame::advertise() {
     Parasite::sendAdvertising();
     delay(Config::shortDelay);
     for (int i = 0; i < 150; ++i) {
-      if (Frame::send()) {
-        packets++;
+      Frame::send();  
+      packets++;
 
-        // calculate packets per second
-        float pps = packets / (float)(millis() - startTime) * 1000;
+      // calculate packets per second
+      float pps = packets / (float)(millis() - startTime) * 1000;
 
-        // show pps
-        if (!isinf(pps)) {
-          Serial.print("(>-<) Packets per second: ");
-          Serial.print(pps);
-          Serial.print(" pkt/s (Channel: ");
-          Serial.print(Channel::getChannel());
-          Serial.println(")");
-          Display::updateDisplay(
-              "(>-<)", "Packets per second: " + (String)pps + " pkt/s" +
-                           "(Channel: " + (String)Channel::getChannel() + ")");
-        }
-      } else {
-        Serial.println("(X-X) Advertisment failed to send!");
+      // show pps
+      if (!isinf(pps)) {
+        Serial.print("(>-<) Packets per second: ");
+        Serial.print(pps);
+        Serial.print(" pkt/s (Channel: ");
+        Serial.println(")");
+        Display::updateDisplay(
+            "(>-<)", "Packets per second: " + (String)pps + " pkt/s" +
+                          "(Channel: " + ")");
       }
     }
 

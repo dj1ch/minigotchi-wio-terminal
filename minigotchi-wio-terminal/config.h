@@ -7,10 +7,8 @@
 
 #include "minigotchi.h"
 #include <Arduino.h>
-#include <iostream>
-#include <random>
-#include <string>
 #include <vector>
+#include <string>
 
 class Config {
 public:
@@ -21,15 +19,15 @@ public:
   static int longDelay;
   static bool parasite;
   static bool display;
-  static std::string screen;
+  static String screen;
   static int baud;
   static int channel;
   static std::vector<std::string> whitelist;
   static int epoch;
-  static std::string grid_version;
-  static std::string face;
-  static std::string identity;
-  static std::string name;
+  static String grid_version;
+  static String face;
+  static String identity;
+  static String name;
   static int ap_ttl;
   static bool associate;
   static int bored_num_epochs;
@@ -47,10 +45,10 @@ public:
   static int sta_ttl;
   static int pwnd_run;
   static int pwnd_tot;
-  static std::string session_id;
+  static String session_id;
   static int timestamp;
   static int uptime;
-  static std::string version;
+  static String version;
 
 private:
   static int random(int min, int max);

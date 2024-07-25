@@ -27,7 +27,6 @@ bool Config::parasite = false;
 
 // screen configuration
 bool Config::display = false;
-std::string Config::screen = "";
 
 // define baud rate
 int Config::baud = 115200;
@@ -40,11 +39,11 @@ std::vector<std::string> Config::whitelist = {"SSID", "SSID", "SSID"};
 
 // json config
 int Config::epoch = Minigotchi::currentEpoch;
-std::string Config::face = "(^-^)";
-std::string Config::identity =
+String Config::face = "(^-^)";
+String Config::identity =
     "b9210077f7c14c0651aa338c55e820e93f90110ef679648001b1cecdbffc0090";
-std::string Config::name = "minigotchi";
-std::string Config::grid_version = "1.11.1";
+String Config::name = "minigotchi";
+String Config::grid_version = "1.11.1";
 int Config::ap_ttl = Config::random(30, 600);
 bool Config::associate = true;
 int Config::bored_num_epochs = Config::random(5, 30);
@@ -66,11 +65,11 @@ int Config::sad_num_epochs = Config::random(5, 30);
 int Config::sta_ttl = Config::random(60, 300);
 int Config::pwnd_run = 0;
 int Config::pwnd_tot = 0;
-std::string Config::session_id = "84:f3:eb:58:95:bd";
+String Config::session_id = "84:f3:eb:58:95:bd";
 int Config::uptime = Config::time();
 
 // define version(please do not change, this should not be changed)
-std::string Config::version = "3.2.2-beta";
+String Config::version = "3.2.2-beta";
 
 /** developer note:
  *
@@ -80,7 +79,9 @@ std::string Config::version = "3.2.2-beta";
  */
 
 // randomize config values
-int Config::random(int min, int max) { return min + rand() % (max - min + 1); }
+int Config::random(int min, int max) {
+  return max - min; // for now...
+}
 
 int Config::time() {
   return millis() / 1000; // convert to seconds

@@ -110,10 +110,10 @@ void Minigotchi::version() {
  */
 void Minigotchi::mem() {
   Serial.print("('-') Heap: ");
-  Serial.print(ESP.getFreeHeap());
+  Serial.println("Not supported :(");
   Serial.println(" bytes");
   Display::updateDisplay("('-')",
-                         "Heap: " + (String)ESP.getFreeHeap() + " bytes");
+                         "Heap: " + (String)"Not supported :(");
   delay(Config::shortDelay);
 }
 
@@ -122,10 +122,9 @@ void Minigotchi::mem() {
  */
 void Minigotchi::cpu() {
   Serial.print("('-') CPU Frequency: ");
-  Serial.print(ESP.getCpuFreqMHz());
-  Serial.println(" MHz");
+  Serial.println("Not supported :(");
   Display::updateDisplay(
-      "('-')", "CPU Frequency: " + (String)ESP.getCpuFreqMHz() + " MHz");
+      "('-')", "CPU Frequency: " + (String)"Not supported :(");
   delay(Config::shortDelay);
 }
 
@@ -151,18 +150,18 @@ void Minigotchi::cpu() {
  */
 void Minigotchi::monStart() {
   // revert to station mode
-  wifi_set_opmode(STATION_MODE);
-  wifi_promiscuous_enable(true);
+  WiFi.mode(WIFI_MODE_STA);
+  // disable promisc somehow
 }
 
 /**
  * Takes Minigotchi out of promiscuous mode
  */
 void Minigotchi::monStop() {
-  wifi_promiscuous_enable(false);
+  // enable promisc mode somehow
 
   // revert to station mode
-  wifi_set_opmode(STATION_MODE);
+  WiFi.mode(WIFI_MODE_STA);
 }
 
 /** developer note:
