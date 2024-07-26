@@ -8,13 +8,15 @@
 
 ## [Minigotchi](https://github.com/dj1ch/minigotchi) ported to the Wio Terminal
 
-<img src="images/IMG_1198.jpeg"></img>
+(No project image)
 
 ### Intro
 
-This is the port of Minigotchi to the Wio terminal. Instead of being an ESP32 or ESP8266 sort of SoC, the Wio terminal uses a RTL8720 wifi card, which is... different, especially for a microcontroller. Due to a lack of libraries, support for specific features that the ESP has, there were many features that were stripped from this version.
+This is the **(failed)** port of Minigotchi to the Wio terminal. Instead of being an ESP32 or ESP8266 sort of SoC, the Wio terminal uses a RTL8720 wifi card, which is... different, especially for a microcontroller. Due to a lack of libraries, support for specific features that the ESP has, there were many features that were stripped from this version.
 
 A lot of the hardware APIs and functions aren't really shown or used often in projects involving this microcontroller, so I had to do a bit of digging. At least this is a prebuilt!
+
+And to anyone who has to deal with the burden of a Wio Terminal, I'm extremely sorry for you. There seems to be a lack of... well anything really. Unforunately, due to a lack of what the Minigotchi needs to run on the Wio Terminal, I inevitably will have to archive this repository. Feel free to try to fork, fix, or attempt to reverse engineer any associated libraries with the Wio Terminal.
 
 ### Install guide
 
